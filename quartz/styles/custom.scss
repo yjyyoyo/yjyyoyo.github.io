@@ -2,56 +2,56 @@
 
 // put your custom CSS here!
 /* =========================================
-   卡片式“最新发布”样式增强 (紧凑版)
+   卡片式“最新发布”样式 (极致紧凑版)
 ========================================= */
 .recent-notes {
-  margin-top: 1.5rem;
+  margin-top: 1rem;
   
   ul {
     list-style: none !important; 
     padding: 0;
     display: flex;
     flex-direction: column;
-    gap: 0.6rem !important; /* 🔽 缩小卡片之间的间距 (原来是 1.2) */
+    gap: 0.25rem !important; /* 🔽 极大幅度缩小卡片之间的距离 (仅约4px) */
+    
+    /* 🔽 核心：限制卡片宽度，不再填满整行 */
+    max-width: 25rem; /* 大约 400px 宽，你可以改这个数值调整胖瘦 */
   }
 
   /* 卡片本体样式 */
   li {
     border: 1px solid var(--lightgray);
-    border-radius: 6px; /* 圆角稍微改小一点点显得更精致 */
-    padding: 0.6rem 1rem !important; /* 🔽 大幅缩小卡片内的上下左右留白 */
+    border-radius: 6px; 
+    padding: 0.4rem 0.8rem !important; /* 🔽 再次压缩卡片内部的上下左右留白 */
     background-color: var(--light); 
     transition: all 0.2s ease-in-out; 
+    margin: 0 !important;
     
     &:hover {
-      box-shadow: 0 4px 8px rgba(0, 0, 0, 0.05); /* 阴影调柔和 */
+      box-shadow: 0 2px 6px rgba(0, 0, 0, 0.04);
       transform: translateY(-1px);
       border-color: var(--tertiary);
     }
 
-    /* 🔽 强制覆盖 Quartz 默认的标题和段落间距 */
-    h3 {
-      margin: 0 0 0.2rem 0 !important; /* 标题下面的间距极度缩小 */
-      font-size: 1.1rem; /* 标题字号稍微收敛一点 */
+    /* 暴力清除内部所有元素自带的边距 */
+    * {
+      margin: 0 !important;
+      line-height: 1.3 !important;
     }
 
-    p {
-      margin: 0 !important; /* 强制去掉段落自带的上下留白（核心） */
+    /* 标题容器 (强制调整字体大小和间距) */
+    .section-title, a {
+      font-size: 1rem !important; /* 字体调小，显得精致 */
+      font-weight: 600;
+      display: block;
+      margin-bottom: 0.15rem !important; /* 标题和下方时间的间距压缩到极致 */
     }
 
     /* 时间和标签的容器 */
     .meta {
-      font-size: 0.85rem;
+      font-size: 0.8rem !important; /* 小字显示 */
       color: var(--gray); 
-      margin-top: 0.2rem !important;
-    }
-
-    /* 简介（如果你在 Obsidian 里写了 description） */
-    .description {
-      font-size: 0.9rem;
-      color: var(--darkgray);
-      line-height: 1.4;
-      margin-top: 0.3rem !important;
+      display: block;
     }
   }
 }
