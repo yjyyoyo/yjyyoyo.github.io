@@ -1,0 +1,51 @@
+name: Deploy Quartz site to GitHub Pages
+on:
+  push:
+    branches:
+      - main # 以后你在这个仓库修改装修配置，就会自动触发发布！
+  repository_dispatch:
+    types: [trigger-build] # 依然接收来自仓库A（笔记库）的触发信号
+permissions:
+  contents: read
+  pages: write
+  id-token: write
+jobs:
+  build:
+    runs-on: ubuntu-latest
+    steps:
+      - name: 1. 拉取博客引擎 (现在直接拉取你的仓库B)
+        uses: actions/checkout@v4
+        with:
+          fetch-depth: 0
+      - name: 2. 清空默认的示例笔记
+        run: rm -rf content/*
+      - name: 3. 下载私人笔记 (从仓库A拉取)
+        uses: actions/checkout@v4
+        with:
+          repository: yjyyoyo/yoyoBlog # 你的笔记仓库 A
+          token: ${{ secrets.PAT_TOKEN }}
+          path: content
+          fetch-depth: 0
+      - name: 4. 配置 Node 环境
+        uses: actions/setup-node@v4
+        with:
+          node-version: 22
+      - name: 5. 安装依赖并打包
+        run: |
+          npm ci
+          npm install @quartz-community/utils #先装上
+          npx quartz build
+      - name: 6. 准备上传到 Pages
+        uses: actions/upload-pages-artifact@v3
+        with:
+          path: public
+  deploy:
+    needs: build
+    environment:
+      name: github-pages
+      url: ${{ steps.deployment.outputs.page_url }}
+    runs-on: ubuntu-latest
+    steps:
+      - name: 7. 部署到 GitHub Pages
+        id: deployment
+        uses: actions/deploy-pages@v4
