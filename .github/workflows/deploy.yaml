@@ -33,7 +33,6 @@ jobs:
       - name: 5. 安装依赖并打包
         run: |
           npm ci
-          npm install @quartz-community/utils #先装上
           npx quartz build
       - name: 6. 准备上传到 Pages
         uses: actions/upload-pages-artifact@v3
