@@ -49,9 +49,9 @@ export const defaultContentPageLayout: PageLayout = {
     // ➕ 放在正文下方的主区域（居中宽屏显示） ➕
     Component.RecentNotes({
       title: "🆕 最新发布",
-      limit: 5, 
+      limit: 10, 
       filter: (f) => f.slug !== "index", 
-      showTags: false, 
+      showTags: true,//卡片显示标签 
     }),
   ],
 }

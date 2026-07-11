@@ -1,3 +1,54 @@
 @use "./base.scss";
 
 // put your custom CSS here!
+/* =========================================
+   卡片式“最新发布”样式增强
+========================================= */
+.recent-notes {
+  margin-top: 2rem;
+  
+  ul {
+    list-style: none !important; /* 去掉前面的小圆点 */
+    padding: 0;
+    display: flex;
+    flex-direction: column;
+    gap: 1.2rem; /* 卡片之间的间距 */
+  }
+
+  /* 卡片本体样式 */
+  li {
+    border: 1px solid var(--lightgray); /* 浅色边框，适配深浅色模式 */
+    border-radius: 8px; /* 圆角 */
+    padding: 1.2rem 1.5rem; /* 内边距，让内容不拥挤 */
+    background-color: var(--light); /* 卡片底色 */
+    transition: all 0.2s ease-in-out; /* 增加悬浮动画过渡 */
+    
+    /* 鼠标放上去时的阴影浮动效果 */
+    &:hover {
+      box-shadow: 0 6px 12px rgba(0, 0, 0, 0.08);
+      transform: translateY(-2px);
+      border-color: var(--tertiary);
+    }
+  }
+
+  /* 调整标题大小 */
+  .section-h3 {
+    margin: 0 0 0.5rem 0;
+    font-size: 1.3rem;
+  }
+
+  /* 时间和标签的容器 */
+  .meta {
+    font-size: 0.85rem;
+    color: var(--gray); /* 小字显示时间 */
+    margin-bottom: 0.5rem;
+  }
+
+  /* 简介（如果有的话） */
+  .desc {
+    font-size: 0.95rem;
+    color: var(--darkgray);
+    line-height: 1.6;
+    margin-top: 0.5rem;
+  }
+}
