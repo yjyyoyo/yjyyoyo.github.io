@@ -2,18 +2,24 @@ name: Deploy Quartz site to GitHub Pages
 on:
   push:
     branches:
-      - main # 以后你在这个仓库修改装修配置，就会自动触发发布！
+      - main
   repository_dispatch:
-    types: [trigger-build] # 依然接收来自仓库A（笔记库）的触发信号
+    types: [trigger-build] 
 permissions:
   contents: read
   pages: write
   id-token: write
+
+# 增加：防并发冲突机制（如果上一次打包没完成你又按了推送，会自动取消上一次，避免排队卡死）
+concurrency:
+  group: "pages"
+  cancel-in-progress: false
+
 jobs:
   build:
     runs-on: ubuntu-latest
     steps:
-      - name: 1. 拉取博客引擎 (现在直接拉取你的仓库B)
+      - name: 1. 拉取博客引擎 
         uses: actions/checkout@v4
         with:
           fetch-depth: 0
@@ -22,7 +28,7 @@ jobs:
       - name: 3. 下载私人笔记 (从仓库A拉取)
         uses: actions/checkout@v4
         with:
-          repository: yjyyoyo/yoyoBlog # 你的笔记仓库 A
+          repository: yjyyoyo/yoyoBlog 
           token: ${{ secrets.PAT_TOKEN }}
           path: content
           fetch-depth: 0
