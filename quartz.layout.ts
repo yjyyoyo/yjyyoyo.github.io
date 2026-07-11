@@ -44,6 +44,14 @@ export const defaultContentPageLayout: PageLayout = {
     Component.Graph(),
     Component.DesktopOnly(Component.TableOfContents()),
     Component.Backlinks(),
+    // ➕ 下面是你新加的“最新发布”组件 ➕
+    Component.RecentNotes({
+      title: "🆕 最新发布",
+      limit: 10, // 你可以改成 10，控制显示多少篇
+      filter: (f) => f.slug !== "index", // 自动排除首页，只显示文章
+      showTags: false, // 如果你想显示文章标签，可以改成 true
+    }),
+    // ➕ 上面是你新加的“最新发布”组件 ➕
   ],
 }
 
