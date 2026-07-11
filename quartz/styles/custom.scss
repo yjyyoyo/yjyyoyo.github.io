@@ -12,17 +12,17 @@
     padding: 0;
     display: flex;
     flex-direction: column;
-    gap: 0.25rem !important; /* 🔽 极大幅度缩小卡片之间的距离 (仅约4px) */
+    gap: 0.5rem !important; /* 🔽 极大幅度缩小卡片之间的距离 (仅约4px) */
     
     /* 🔽 核心：限制卡片宽度，不再填满整行 */
-    max-width: 25rem; /* 大约 400px 宽，你可以改这个数值调整胖瘦 */
+    max-width: 30rem; /* 大约 400px 宽，你可以改这个数值调整胖瘦 */
   }
 
   /* 卡片本体样式 */
   li {
     border: 1px solid var(--lightgray);
     border-radius: 6px; 
-    padding: 0.4rem 0.8rem !important; /* 🔽 再次压缩卡片内部的上下左右留白 */
+    padding: 0.6rem 1.0rem !important; /* 🔽 再次压缩卡片内部的上下左右留白 */
     background-color: var(--light); 
     transition: all 0.2s ease-in-out; 
     margin: 0 !important;

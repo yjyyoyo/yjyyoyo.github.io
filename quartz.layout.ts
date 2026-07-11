@@ -51,7 +51,7 @@ export const defaultContentPageLayout: PageLayout = {
       title: "🆕 最新发布",
       limit: 10, 
       filter: (f) => f.slug !== "index", 
-      showTags: true,//卡片显示标签 
+      showTags: false,//卡片显示标签 
     }),
   ],
 }
