@@ -20,20 +20,20 @@ jobs:
     runs-on: ubuntu-latest
     steps:
       - name: 1. 拉取博客引擎 
-        uses: actions/checkout@v4
+        uses: actions/checkout@v7
         with:
           fetch-depth: 0
       - name: 2. 清空默认的示例笔记
         run: rm -rf content/*
       - name: 3. 下载私人笔记 (从仓库A拉取)
-        uses: actions/checkout@v4
+        uses: actions/checkout@v7
         with:
           repository: yjyyoyo/yoyoBlog 
           token: ${{ secrets.PAT_TOKEN }}
           path: content
           fetch-depth: 0
       - name: 4. 配置 Node 环境
-        uses: actions/setup-node@v4
+        uses: actions/setup-node@v7
         with:
           node-version: 22
       - name: 5. 安装依赖并打包
@@ -41,7 +41,7 @@ jobs:
           npm ci
           npx quartz build
       - name: 6. 准备上传到 Pages
-        uses: actions/upload-pages-artifact@v3
+        uses: actions/upload-pages-artifact@v5
         with:
           path: public
   deploy:
@@ -53,4 +53,4 @@ jobs:
     steps:
       - name: 7. 部署到 GitHub Pages
         id: deployment
-        uses: actions/deploy-pages@v4
+        uses: actions/deploy-pages@v5
